@@ -1,7 +1,7 @@
 # swe-6-4-join-queries
 
 This assignment covers **JOIN queries** and **connecting to Postgres with `pg`**. You'll implement JavaScript functions that query a pre-built `bookmarks_db` database using JOIN queries.
-( commit)
+
 - [Setup](#setup)
 - [Grading (5 points)](#grading-5-points)
 - [Expected Output](#expected-output)

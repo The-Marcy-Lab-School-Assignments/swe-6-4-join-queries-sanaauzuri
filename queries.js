@@ -5,6 +5,12 @@ const pool = require('./db/pool');
 //    Return an array of objects. Each object should have: title, url, username.
 const getAllBookmarksWithUsername = async () => {
   // YOUR CODE HERE
+  const query = 
+  `SELECT bookmarks.title, bookmarks.url, users.username
+  FROM bookmarks
+  INNER JOIN users ON bookmarks.user_id = users.user_id`;
+  const { rows } = await pool.query(query)
+  return rows
 };
 
 // 2. Get all bookmarks saved by a specific user.
