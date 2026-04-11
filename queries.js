@@ -45,12 +45,27 @@ const getBookmarksWithAllTags = async () => {
 //    Group by users.user_id and alias the count as total_bookmarks.
 //    Return an array of objects. Each object should have: username, total_bookmarks.
 const getUsersWithBookmarkCount = async () => {
+  const query = `
+  SELECT users.user_id, users.username, COUNT(bookmarks.bookmark_id) AS total_bookmarks
+  FROM users
+  LEFT JOIN bookmarks ON users.user_id = bookmarks.user_id
+  GROUP BY users.user_id`;
+  const { rows } = await pool.query(query)
+  return rows
   // YOUR CODE HERE
 };
 
 // 5. Get all bookmarks that have no tags.
 //    Return an array of objects. Each object should have: title, url, username.
 const getBookmarksWithNoTags = async () => {
+  const query = `
+  SELECT bookmarks.title, bookmarks.url, users.username
+  FROM bookmarks
+  INNER JOIN users ON bookmarks.user_id = users.user_id
+  LEFT JOIN bookmark_tags ON bookmarks.bookmark_id = bookmark_tags.bookmark_id
+  WHERE bookmark_tags.bookmark_id IS NULL`;
+  const { rows } = await pool.query(query)
+  return rows
   // YOUR CODE HERE
 };
 
