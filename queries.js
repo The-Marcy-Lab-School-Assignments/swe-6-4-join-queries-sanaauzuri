@@ -17,6 +17,13 @@ const getAllBookmarksWithUsername = async () => {
 //    Return an array of objects. Each object should have: title, url, username.
 const getBookmarksByUsername = async (username) => {
   // YOUR CODE HERE
+  const query = 
+  `SELECT bookmarks.title, bookmarks.url, users.username
+  FROM bookmarks
+  INNER JOIN users ON bookmarks.user_id = users.user_id
+  WHERE users.username = $1`;
+  const { rows } = await pool.query(query, [username])
+  return rows
 };
 
 // 3. Get all bookmarks that have at least one tag, along with the tag name.
