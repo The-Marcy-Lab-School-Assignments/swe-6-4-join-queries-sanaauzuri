@@ -31,6 +31,13 @@ const getBookmarksByUsername = async (username) => {
 //    Return an array of objects. Each object should have: title, url, tag_name.
 const getBookmarksWithAllTags = async () => {
   // YOUR CODE HERE
+  const query = `
+  SELECT bookmarks.title, bookmarks.url, tags.tag_id
+  FROM bookmarks
+  INNER JOIN bookmark_tags ON bookmarks.bookmark_id = bookmark_tags.bookmark_id
+  INNER JOIN tags ON bookmark_tags.tag_id = tags.tag_id`;
+  const { rows } = await pool.query(query)
+  return rows
 };
 
 // 4. Get all users and the total number of bookmarks they have saved.
