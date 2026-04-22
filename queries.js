@@ -32,7 +32,7 @@ const getBookmarksByUsername = async (username) => {
 const getBookmarksWithAllTags = async () => {
   // YOUR CODE HERE
   const query = `
-  SELECT bookmarks.title, bookmarks.url, tags.tag_id
+  SELECT bookmarks.title, bookmarks.url, tags.name AS tag_name
   FROM bookmarks
   INNER JOIN bookmark_tags ON bookmarks.bookmark_id = bookmark_tags.bookmark_id
   INNER JOIN tags ON bookmark_tags.tag_id = tags.tag_id`;
@@ -46,7 +46,7 @@ const getBookmarksWithAllTags = async () => {
 //    Return an array of objects. Each object should have: username, total_bookmarks.
 const getUsersWithBookmarkCount = async () => {
   const query = `
-  SELECT users.user_id, users.username, COUNT(bookmarks.bookmark_id) AS total_bookmarks
+  SELECT users.username, COUNT(bookmarks.bookmark_id) AS total_bookmarks
   FROM users
   LEFT JOIN bookmarks ON users.user_id = bookmarks.user_id
   GROUP BY users.user_id`;
